@@ -4,9 +4,7 @@ import 'package:rick_and_morty_app/screens/episodes_list/widgets/episode_tile.da
 class SearchScreen extends StatefulWidget {
   final List<Map<String, dynamic>> episodes;
 
-  SearchScreen({Key key, @required this.episodes})
-      : assert(episodes != null),
-        super(key: key);
+  SearchScreen({Key? key, required this.episodes}) : super(key: key);
 
   @override
   _SearchScreenState createState() => _SearchScreenState();

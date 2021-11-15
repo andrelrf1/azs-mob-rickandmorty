@@ -6,7 +6,7 @@ class Graphql {
     cache: GraphQLCache(),
   );
 
-  Future<QueryResult> getAllEpisodes({int page}) async {
+  Future<QueryResult> getAllEpisodes({int? page}) async {
     var result = await _graphql.query(QueryOptions(
       document: gql(
         r'''
@@ -27,7 +27,7 @@ class Graphql {
     return result;
   }
 
-  Future<QueryResult> getEpisode({int id}) async {
+  Future<QueryResult> getEpisode({int? id}) async {
     var result = await _graphql.query(QueryOptions(
       document: gql(
         r'''
@@ -53,7 +53,7 @@ class Graphql {
     return result;
   }
 
-  Future<QueryResult> getCharacter({int id}) async {
+  Future<QueryResult> getCharacter({int? id}) async {
     var result = await _graphql.query(QueryOptions(
       document: gql(
         r'''

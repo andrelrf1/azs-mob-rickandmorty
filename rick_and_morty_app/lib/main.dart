@@ -12,6 +12,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Rick and Morty',
       theme: ThemeData(brightness: Brightness.dark),
+      debugShowCheckedModeBanner: false,
       routes: {
         '/': (context) => SplashScreen(),
         '/home': (context) => HomeScreen(),

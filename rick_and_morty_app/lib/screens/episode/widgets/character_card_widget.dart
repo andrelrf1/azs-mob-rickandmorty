@@ -1,22 +1,18 @@
 import 'package:flutter/material.dart';
 
 class CharacterCardWidget extends StatelessWidget {
-  final String characterName;
-  final String specie;
-  final String status;
-  final String imageURL;
+  final String? characterName;
+  final String? specie;
+  final String? status;
+  final String? imageURL;
 
   CharacterCardWidget({
-    Key key,
-    @required this.characterName,
-    @required this.specie,
-    @required this.status,
-    @required this.imageURL,
-  })  : assert(characterName != null &&
-            specie != null &&
-            status != null &&
-            imageURL != null),
-        super(key: key);
+    Key? key,
+    required this.characterName,
+    required this.specie,
+    required this.status,
+    required this.imageURL,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -26,7 +22,7 @@ class CharacterCardWidget extends StatelessWidget {
           decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(15.0),
             image: DecorationImage(
-              image: NetworkImage(imageURL),
+              image: NetworkImage(imageURL!),
               fit: BoxFit.cover,
             ),
           ),
@@ -49,7 +45,7 @@ class CharacterCardWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             mainAxisAlignment: MainAxisAlignment.end,
             children: [
-              Text(characterName),
+              Text(characterName!),
               Text(
                 '$specie - $status',
                 style: TextStyle(

@@ -3,7 +3,7 @@ import 'package:sqflite/sqflite.dart';
 import 'package:rick_and_morty_app/models/episode.dart';
 
 class SQLite {
-  Database _database;
+  late Database _database;
   Map<String, dynamic> _queries = {
     'create':
         'CREATE TABLE episodes(id INTEGER PRIMARY KEY NOT NULL, name TEXT, episode VARCHAR(6), airDate VARCHAR(32), watched INTEGER, liked INTEGER);',
@@ -24,7 +24,7 @@ class SQLite {
     );
   }
 
-  Future<void> insertEpisode({Episode episode}) async {
+  Future<void> insertEpisode({required Episode episode}) async {
     await _database.insert(
       'episodes',
       episode.toMap(),
@@ -32,7 +32,7 @@ class SQLite {
     );
   }
 
-  Future<List<Episode>> getEpisodes(String type, {int id}) async {
+  Future<List<Episode>> getEpisodes(String type, {int? id}) async {
     List<Map<String, dynamic>> episodes;
     if (type == 'getWatched') {
       episodes = await _database.rawQuery(_queries['getWatched'], [1, id]);

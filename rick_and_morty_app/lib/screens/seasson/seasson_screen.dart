@@ -1,20 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:rick_and_morty_app/screens/episodes_list/widgets/episode_tile.dart';
 
-class SeassonScreen extends StatelessWidget {
+class SeasonScreen extends StatelessWidget {
   final List<Map<String, dynamic>> episodes;
 
-  SeassonScreen({
-    Key key,
-    @required this.episodes,
-  })  : assert(episodes != null),
-        super(key: key);
+  SeasonScreen({
+    Key? key,
+    required this.episodes,
+  })  : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Seasson'),
+        title: Text('Season'),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: RotatedBox(

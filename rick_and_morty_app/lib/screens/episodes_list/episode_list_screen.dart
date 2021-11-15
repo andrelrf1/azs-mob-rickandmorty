@@ -24,13 +24,15 @@ class _EpisodeListScreenState extends State<EpisodeListScreen> {
       graphql.getAllEpisodes(page: 2),
       graphql.getAllEpisodes(page: 3),
     ]);
-    List<Map<String, dynamic>> data = [for (var result in results) result.data];
+    List<Map<String, dynamic>?> data = [
+      for (var result in results) result.data
+    ];
     if (this.mounted) {
       setState(() {
         _episodes = [
-          ...data[0]['episodes']['results'],
-          ...data[1]['episodes']['results'],
-          ...data[2]['episodes']['results'],
+          ...data[0]!['episodes']['results'],
+          ...data[1]!['episodes']['results'],
+          ...data[2]!['episodes']['results'],
         ];
       });
       _loading = false;
@@ -45,7 +47,7 @@ class _EpisodeListScreenState extends State<EpisodeListScreen> {
       }
     });
     Navigator.of(context).push(MaterialPageRoute(
-      builder: (context) => SeassonScreen(episodes: data),
+      builder: (context) => SeasonScreen(episodes: data),
     ));
   }
 
@@ -179,29 +181,29 @@ class _EpisodeListScreenState extends State<EpisodeListScreen> {
                         ),
                         controller: _scrollCtrl,
                         children: [
-                          SeassonCardWidget(
-                            seassonTitle: '1ª Temporada',
+                          SeasonCardWidget(
+                            seasonTitle: '1ª Temporada',
                             imagePath: 'assets/baners/s1.jpg',
                             onPressed: () {
                               nextScreen('S01');
                             },
                           ),
-                          SeassonCardWidget(
-                            seassonTitle: '2ª Temporada',
+                          SeasonCardWidget(
+                            seasonTitle: '2ª Temporada',
                             imagePath: 'assets/baners/s2.jpg',
                             onPressed: () {
                               nextScreen('S02');
                             },
                           ),
-                          SeassonCardWidget(
-                            seassonTitle: '3ª Temporada',
+                          SeasonCardWidget(
+                            seasonTitle: '3ª Temporada',
                             imagePath: 'assets/baners/s3.jpg',
                             onPressed: () {
                               nextScreen('S03');
                             },
                           ),
-                          SeassonCardWidget(
-                            seassonTitle: '4ª Temporada',
+                          SeasonCardWidget(
+                            seasonTitle: '4ª Temporada',
                             imagePath: 'assets/baners/s4.png',
                             onPressed: () {
                               nextScreen('S04');

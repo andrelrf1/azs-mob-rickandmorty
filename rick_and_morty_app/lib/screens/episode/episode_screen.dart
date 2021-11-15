@@ -8,15 +8,15 @@ import 'package:rick_and_morty_app/sqlite.dart';
 
 class EpisodeScreen extends StatefulWidget {
   final int id;
-  final bool watched;
-  final bool liked;
+  final bool? watched;
+  final bool? liked;
+
   EpisodeScreen({
-    Key key,
-    @required this.id,
+    Key? key,
+    required this.id,
     this.watched = false,
     this.liked = false,
-  })  : assert(id != null),
-        super(key: key);
+  }) : super(key: key);
 
   @override
   _EpisodeScreenState createState() =>
@@ -25,20 +25,20 @@ class EpisodeScreen extends StatefulWidget {
 
 class _EpisodeScreenState extends State<EpisodeScreen> {
   final ScrollController _scrollCtrl = ScrollController();
-  Map<String, dynamic> _episodeData = {};
+  Map<String, dynamic>? _episodeData = {};
   bool _loading = true;
-  bool watched;
-  bool liked;
+  bool? watched;
+  bool? liked;
 
   _EpisodeScreenState({this.watched, this.liked});
 
   Future<void> saveEpisodeDetails() async {
     SQLite dataBase = SQLite();
     Episode episode = Episode(
-      id: int.parse(_episodeData['id']),
-      name: _episodeData['name'],
-      episode: _episodeData['episode'],
-      airDate: _episodeData['air_date'],
+      id: int.parse(_episodeData!['id']),
+      name: _episodeData!['name'],
+      episode: _episodeData!['episode'],
+      airDate: _episodeData!['air_date'],
       liked: liked,
       watched: watched,
     );
@@ -47,9 +47,9 @@ class _EpisodeScreenState extends State<EpisodeScreen> {
     await dataBase.disconnect();
   }
 
-  String getImageRoute(String epDetails) {
+  String? getImageRoute(String epDetails) {
     epDetails = epDetails.substring(0, 3);
-    String imageRoute;
+    String? imageRoute;
     switch (epDetails) {
       case 'S01':
         imageRoute = 'assets/baners/s1.jpg';
@@ -78,7 +78,7 @@ class _EpisodeScreenState extends State<EpisodeScreen> {
     );
     setState(() {
       if (this.mounted) {
-        _episodeData = result.data['episode'];
+        _episodeData = result.data!['episode'];
         if (data.isNotEmpty) {
           watched = data[0].watched;
           liked = data[0].liked;
@@ -123,7 +123,7 @@ class _EpisodeScreenState extends State<EpisodeScreen> {
                   height: 300.0,
                   width: double.infinity,
                   child: Image.asset(
-                    getImageRoute(_episodeData['episode']),
+                    getImageRoute(_episodeData!['episode'])!,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -157,7 +157,7 @@ class _EpisodeScreenState extends State<EpisodeScreen> {
                               Container(
                                 width: MediaQuery.of(context).size.width * 0.8,
                                 child: Text(
-                                  '${_episodeData['id']} - ${_episodeData['name']}',
+                                  '${_episodeData!['id']} - ${_episodeData!['name']}',
                                   style: TextStyle(fontSize: 26),
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 3,
@@ -165,12 +165,12 @@ class _EpisodeScreenState extends State<EpisodeScreen> {
                               ),
                               SizedBox(height: 5.0),
                               Text(
-                                '${_episodeData['episode']}',
+                                '${_episodeData!['episode']}',
                                 style: TextStyle(fontSize: 14),
                               ),
                               SizedBox(height: 5.0),
                               Text(
-                                '${_episodeData['air_date']}',
+                                '${_episodeData!['air_date']}',
                                 style: TextStyle(fontSize: 14),
                               ),
                             ],
@@ -204,14 +204,14 @@ class _EpisodeScreenState extends State<EpisodeScreen> {
                             label: Text('Assistido'),
                             onPressed: () async {
                               setState(() {
-                                watched = !watched;
-                                if (!watched) {
+                                watched = !watched!;
+                                if (!watched!) {
                                   liked = watched;
                                 }
                               });
                               await saveEpisodeDetails();
                             },
-                            backgroundColor: watched ? Colors.cyan : null,
+                            backgroundColor: watched! ? Colors.cyan : null,
                           ),
                           SizedBox(width: 10.0),
                           ActionChip(
@@ -219,14 +219,14 @@ class _EpisodeScreenState extends State<EpisodeScreen> {
                             label: Text('Favorito'),
                             onPressed: () async {
                               setState(() {
-                                liked = !liked;
-                                if (liked) {
+                                liked = !liked!;
+                                if (liked!) {
                                   watched = liked;
                                 }
                               });
                               await saveEpisodeDetails();
                             },
-                            backgroundColor: liked ? Colors.orange[600] : null,
+                            backgroundColor: liked! ? Colors.orange[600] : null,
                           ),
                         ],
                       ),
@@ -245,14 +245,15 @@ class _EpisodeScreenState extends State<EpisodeScreen> {
                           mainAxisSpacing: 10.0,
                           childAspectRatio: (50 / 70),
                         ),
-                        itemCount: _episodeData['characters'].length,
+                        itemCount: _episodeData!['characters'].length,
                         itemBuilder: (context, index) => CharacterCardWidget(
-                            characterName: _episodeData['characters'][index]
+                            characterName: _episodeData!['characters'][index]
                                 ['name'],
-                            specie: _episodeData['characters'][index]
+                            specie: _episodeData!['characters'][index]
                                 ['species'],
-                            status: _episodeData['characters'][index]['status'],
-                            imageURL: _episodeData['characters'][index]
+                            status: _episodeData!['characters'][index]
+                                ['status'],
+                            imageURL: _episodeData!['characters'][index]
                                 ['image']),
                       ),
                       SizedBox(height: 20.0),

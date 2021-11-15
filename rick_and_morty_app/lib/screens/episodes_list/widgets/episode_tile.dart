@@ -2,30 +2,26 @@ import 'package:flutter/material.dart';
 import 'package:rick_and_morty_app/screens/episode/episode_screen.dart';
 
 class EpisodeTileWidget extends StatelessWidget {
-  final String title;
-  final String details;
-  final String releaseDate;
-  final int id;
-  final bool watched;
-  final bool liked;
+  final String? title;
+  final String? details;
+  final String? releaseDate;
+  final int? id;
+  final bool? watched;
+  final bool? liked;
 
   EpisodeTileWidget({
-    Key key,
-    @required this.title,
-    @required this.details,
-    @required this.releaseDate,
-    @required this.id,
+    Key? key,
+    required this.title,
+    required this.details,
+    required this.releaseDate,
+    required this.id,
     this.watched = false,
     this.liked = false,
-  })  : assert(title != null &&
-            details != null &&
-            id != null &&
-            releaseDate != null),
-        super(key: key);
+  }) : super(key: key);
 
-  String getImageRoute(String epDetails) {
+  String? getImageRoute(String epDetails) {
     epDetails = epDetails.substring(0, 3);
-    String imageRoute;
+    String? imageRoute;
     switch (epDetails) {
       case 'S01':
         imageRoute = 'assets/baners/s1.jpg';
@@ -62,7 +58,7 @@ class EpisodeTileWidget extends StatelessWidget {
                 child: ClipRRect(
                   borderRadius: BorderRadius.circular(8.0),
                   child: Image.asset(
-                    getImageRoute(details),
+                    getImageRoute(details!)!,
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -93,7 +89,7 @@ class EpisodeTileWidget extends StatelessWidget {
       onTap: () {
         Navigator.of(context).push(MaterialPageRoute(
           builder: (context) => EpisodeScreen(
-            id: id,
+            id: id!,
             watched: watched,
             liked: liked,
           ),

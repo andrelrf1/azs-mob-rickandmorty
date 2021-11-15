@@ -1,24 +1,23 @@
 import 'package:flutter/material.dart';
 
-class SeassonCardWidget extends StatelessWidget {
-  final String seassonTitle;
+class SeasonCardWidget extends StatelessWidget {
+  final String seasonTitle;
   final String imagePath;
   final Function onPressed;
 
-  SeassonCardWidget({
-    Key key,
-    @required this.seassonTitle,
-    @required this.imagePath,
-    @required this.onPressed,
-  })  : assert(seassonTitle != null && imagePath != null && onPressed != null),
-        super(key: key);
+  SeasonCardWidget({
+    Key? key,
+    required this.seasonTitle,
+    required this.imagePath,
+    required this.onPressed,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Padding(
       padding: const EdgeInsets.only(bottom: 10.0),
       child: InkWell(
-        onTap: onPressed,
+        onTap: onPressed as void Function()?,
         borderRadius: BorderRadius.circular(15.0),
         child: Container(
           width: double.infinity,
@@ -47,7 +46,7 @@ class SeassonCardWidget extends StatelessWidget {
             child: Align(
               alignment: Alignment.bottomLeft,
               child: Text(
-                seassonTitle,
+                seasonTitle,
                 style: TextStyle(
                   fontSize: 20.0,
                 ),

@@ -3,9 +3,7 @@ import 'package:flutter/material.dart';
 class BottomAppBarWidget extends StatefulWidget {
   final PageController pageCtrl;
 
-  BottomAppBarWidget({Key key, @required this.pageCtrl})
-      : assert(pageCtrl != null),
-        super(key: key);
+  BottomAppBarWidget({Key? key, required this.pageCtrl}) : super(key: key);
 
   @override
   _BottomAppBarWidgetState createState() => _BottomAppBarWidgetState();
