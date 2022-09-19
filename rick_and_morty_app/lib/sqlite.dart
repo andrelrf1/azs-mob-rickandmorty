@@ -4,7 +4,7 @@ import 'package:rick_and_morty_app/models/episode.dart';
 
 class SQLite {
   late Database _database;
-  Map<String, dynamic> _queries = {
+  final Map<String, dynamic> _queries = {
     'create':
         'CREATE TABLE episodes(id INTEGER PRIMARY KEY NOT NULL, name TEXT, episode VARCHAR(6), airDate VARCHAR(32), watched INTEGER, liked INTEGER);',
     'getAll': 'SELECT * FROM episodes;',

@@ -4,23 +4,23 @@ import 'package:rick_and_morty_app/screens/episodes_list/widgets/episode_tile.da
 class SeasonScreen extends StatelessWidget {
   final List<Map<String, dynamic>> episodes;
 
-  SeasonScreen({
+  const SeasonScreen({
     Key? key,
     required this.episodes,
-  })  : super(key: key);
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Season'),
+        title: const Text('Season'),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         leading: RotatedBox(
           quarterTurns: 1,
           child: IconButton(
             splashRadius: 25,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_circle_down,
               size: 30,
             ),

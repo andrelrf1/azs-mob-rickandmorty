@@ -7,6 +7,8 @@ import 'package:rick_and_morty_app/screens/search/search_screen.dart';
 import 'package:rick_and_morty_app/screens/seasson/seasson_screen.dart';
 
 class EpisodeListScreen extends StatefulWidget {
+  const EpisodeListScreen({super.key});
+
   @override
   _EpisodeListScreenState createState() => _EpisodeListScreenState();
 }
@@ -27,7 +29,7 @@ class _EpisodeListScreenState extends State<EpisodeListScreen> {
     List<Map<String, dynamic>?> data = [
       for (var result in results) result.data
     ];
-    if (this.mounted) {
+    if (mounted) {
       setState(() {
         _episodes = [
           ...data[0]!['episodes']['results'],
@@ -41,11 +43,11 @@ class _EpisodeListScreenState extends State<EpisodeListScreen> {
 
   void nextScreen(String seasson) {
     List<Map<String, dynamic>> data = [];
-    _episodes.forEach((element) {
+    for (var element in _episodes) {
       if (element['episode'].contains(seasson)) {
         data.add(element);
       }
-    });
+    }
     Navigator.of(context).push(MaterialPageRoute(
       builder: (context) => SeasonScreen(episodes: data),
     ));
@@ -61,14 +63,14 @@ class _EpisodeListScreenState extends State<EpisodeListScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Início'),
+        title: const Text('Início'),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
         actions: [
           _loading
-              ? Container(width: 0.0, height: 0.0)
+              ? const SizedBox()
               : IconButton(
-                  icon: Icon(Icons.search_rounded),
+                  icon: const Icon(Icons.search_rounded),
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
                       builder: (context) => SearchScreen(episodes: _episodes),
@@ -77,39 +79,35 @@ class _EpisodeListScreenState extends State<EpisodeListScreen> {
                 ),
         ],
         bottom: PreferredSize(
-          preferredSize: Size.fromHeight(50),
-          child: Container(
-            child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 15.0),
-              child: Row(
-                children: [
-                  ActionChip(
-                    label: Text('Episódios'),
-                    onPressed: () {
-                      setState(() {
-                        _selectedChip = 0;
-                      });
-                    },
-                    backgroundColor: _selectedChip == 0
-                        ? Colors.green[700]
-                        : Colors.grey[700],
-                  ),
-                  SizedBox(
-                    width: 8.0,
-                  ),
-                  ActionChip(
-                    label: Text('Temporadas'),
-                    onPressed: () {
-                      setState(() {
-                        _selectedChip = 1;
-                      });
-                    },
-                    backgroundColor: _selectedChip == 1
-                        ? Colors.green[700]
-                        : Colors.grey[700],
-                  ),
-                ],
-              ),
+          preferredSize: const Size.fromHeight(50),
+          child: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 15.0),
+            child: Row(
+              children: [
+                ActionChip(
+                  label: const Text('Episódios'),
+                  onPressed: () {
+                    setState(() {
+                      _selectedChip = 0;
+                    });
+                  },
+                  backgroundColor:
+                      _selectedChip == 0 ? Colors.green[700] : Colors.grey[700],
+                ),
+                const SizedBox(
+                  width: 8.0,
+                ),
+                ActionChip(
+                  label: const Text('Temporadas'),
+                  onPressed: () {
+                    setState(() {
+                      _selectedChip = 1;
+                    });
+                  },
+                  backgroundColor:
+                      _selectedChip == 1 ? Colors.green[700] : Colors.grey[700],
+                ),
+              ],
             ),
           ),
         ),
@@ -117,14 +115,14 @@ class _EpisodeListScreenState extends State<EpisodeListScreen> {
       body: Scrollbar(
         controller: _scrollCtrl,
         child: _loading
-            ? Center(child: CircularProgressIndicator())
+            ? const Center(child: CircularProgressIndicator())
             : _selectedChip == 0
                 ? _episodes.isEmpty
                     ? Center(
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
+                          children: const [
                             Icon(
                               Icons.movie_filter_outlined,
                               size: 60.0,
@@ -160,7 +158,7 @@ class _EpisodeListScreenState extends State<EpisodeListScreen> {
                         child: Column(
                           mainAxisSize: MainAxisSize.min,
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
+                          children: const [
                             Icon(
                               Icons.movie_filter_outlined,
                               size: 60.0,

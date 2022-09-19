@@ -5,7 +5,7 @@ class SeasonCardWidget extends StatelessWidget {
   final String imagePath;
   final Function onPressed;
 
-  SeasonCardWidget({
+  const SeasonCardWidget({
     Key? key,
     required this.seasonTitle,
     required this.imagePath,
@@ -34,7 +34,7 @@ class SeasonCardWidget extends StatelessWidget {
             padding: const EdgeInsets.all(20.0),
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(15.0),
-              gradient: LinearGradient(
+              gradient: const LinearGradient(
                 begin: Alignment.topCenter,
                 end: Alignment.bottomCenter,
                 colors: [
@@ -47,7 +47,7 @@ class SeasonCardWidget extends StatelessWidget {
               alignment: Alignment.bottomLeft,
               child: Text(
                 seasonTitle,
-                style: TextStyle(
+                style: const TextStyle(
                   fontSize: 20.0,
                 ),
               ),

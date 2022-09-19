@@ -11,7 +11,7 @@ class EpisodeScreen extends StatefulWidget {
   final bool? watched;
   final bool? liked;
 
-  EpisodeScreen({
+  const EpisodeScreen({
     Key? key,
     required this.id,
     this.watched = false,
@@ -19,8 +19,7 @@ class EpisodeScreen extends StatefulWidget {
   }) : super(key: key);
 
   @override
-  _EpisodeScreenState createState() =>
-      _EpisodeScreenState(watched: watched, liked: liked);
+  _EpisodeScreenState createState() => _EpisodeScreenState();
 }
 
 class _EpisodeScreenState extends State<EpisodeScreen> {
@@ -29,8 +28,6 @@ class _EpisodeScreenState extends State<EpisodeScreen> {
   bool _loading = true;
   bool? watched;
   bool? liked;
-
-  _EpisodeScreenState({this.watched, this.liked});
 
   Future<void> saveEpisodeDetails() async {
     SQLite dataBase = SQLite();
@@ -77,7 +74,7 @@ class _EpisodeScreenState extends State<EpisodeScreen> {
       id: widget.id,
     );
     setState(() {
-      if (this.mounted) {
+      if (mounted) {
         _episodeData = result.data!['episode'];
         if (data.isNotEmpty) {
           watched = data[0].watched;
@@ -90,6 +87,8 @@ class _EpisodeScreenState extends State<EpisodeScreen> {
 
   @override
   void initState() {
+    watched = widget.watched;
+    liked = widget.liked;
     getEpisodeData();
     super.initState();
   }
@@ -105,7 +104,7 @@ class _EpisodeScreenState extends State<EpisodeScreen> {
           quarterTurns: 1,
           child: IconButton(
             splashRadius: 25,
-            icon: Icon(
+            icon: const Icon(
               Icons.arrow_circle_down,
               size: 30,
             ),
@@ -116,10 +115,10 @@ class _EpisodeScreenState extends State<EpisodeScreen> {
         ),
       ),
       body: _loading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : Stack(
               children: [
-                Container(
+                SizedBox(
                   height: 300.0,
                   width: double.infinity,
                   child: Image.asset(
@@ -144,9 +143,9 @@ class _EpisodeScreenState extends State<EpisodeScreen> {
                   controller: _scrollCtrl,
                   child: ListView(
                     controller: _scrollCtrl,
-                    padding: EdgeInsets.symmetric(horizontal: 20.0),
+                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
                     children: [
-                      SizedBox(height: 300.0),
+                      const SizedBox(height: 300.0),
                       Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: [
@@ -154,30 +153,30 @@ class _EpisodeScreenState extends State<EpisodeScreen> {
                             mainAxisSize: MainAxisSize.min,
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
-                              Container(
+                              SizedBox(
                                 width: MediaQuery.of(context).size.width * 0.8,
                                 child: Text(
                                   '${_episodeData!['id']} - ${_episodeData!['name']}',
-                                  style: TextStyle(fontSize: 26),
+                                  style: const TextStyle(fontSize: 26),
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 3,
                                 ),
                               ),
-                              SizedBox(height: 5.0),
+                              const SizedBox(height: 5.0),
                               Text(
                                 '${_episodeData!['episode']}',
-                                style: TextStyle(fontSize: 14),
+                                style: const TextStyle(fontSize: 14),
                               ),
-                              SizedBox(height: 5.0),
+                              const SizedBox(height: 5.0),
                               Text(
                                 '${_episodeData!['air_date']}',
-                                style: TextStyle(fontSize: 14),
+                                style: const TextStyle(fontSize: 14),
                               ),
                             ],
                           ),
                         ],
                       ),
-                      SizedBox(height: 20),
+                      const SizedBox(height: 20),
                       Align(
                         alignment: Alignment.centerLeft,
                         child: ActionChip(
@@ -188,20 +187,20 @@ class _EpisodeScreenState extends State<EpisodeScreen> {
                                   'https://play.google.com/store/apps/details?id=com.netflix.mediaclient',
                             );
                           },
-                          label: Text('Assistir na Netflix'),
+                          label: const Text('Assistir na Netflix'),
                           avatar: ClipRRect(
                             borderRadius: BorderRadius.circular(90.0),
                             child: Image.asset('assets/netflix.svg'),
                           ),
                         ),
                       ),
-                      SizedBox(height: 10),
+                      const SizedBox(height: 10),
                       Row(
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           ActionChip(
-                            avatar: Icon(Icons.done_rounded),
-                            label: Text('Assistido'),
+                            avatar: const Icon(Icons.done_rounded),
+                            label: const Text('Assistido'),
                             onPressed: () async {
                               setState(() {
                                 watched = !watched!;
@@ -213,10 +212,10 @@ class _EpisodeScreenState extends State<EpisodeScreen> {
                             },
                             backgroundColor: watched! ? Colors.cyan : null,
                           ),
-                          SizedBox(width: 10.0),
+                          const SizedBox(width: 10.0),
                           ActionChip(
-                            avatar: Icon(Icons.star_rounded),
-                            label: Text('Favorito'),
+                            avatar: const Icon(Icons.star_rounded),
+                            label: const Text('Favorito'),
                             onPressed: () async {
                               setState(() {
                                 liked = !liked!;
@@ -230,16 +229,17 @@ class _EpisodeScreenState extends State<EpisodeScreen> {
                           ),
                         ],
                       ),
-                      SizedBox(height: 60.0),
-                      Text(
+                      const SizedBox(height: 60.0),
+                      const Text(
                         'Characters',
                         style: TextStyle(fontSize: 22),
                       ),
                       GridView.builder(
                         padding: const EdgeInsets.only(top: 20.0),
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 2,
                           crossAxisSpacing: 10.0,
                           mainAxisSpacing: 10.0,
@@ -256,7 +256,7 @@ class _EpisodeScreenState extends State<EpisodeScreen> {
                             imageURL: _episodeData!['characters'][index]
                                 ['image']),
                       ),
-                      SizedBox(height: 20.0),
+                      const SizedBox(height: 20.0),
                     ],
                   ),
                 ),

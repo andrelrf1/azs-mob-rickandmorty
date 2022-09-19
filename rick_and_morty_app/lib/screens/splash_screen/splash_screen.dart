@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 class SplashScreen extends StatefulWidget {
+  const SplashScreen({super.key});
+
   @override
   _SplashScreenState createState() => _SplashScreenState();
 }
@@ -20,11 +22,9 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Container(
-          child: Image.asset(
-            'assets/logo.webp',
-            scale: 1.5,
-          ),
+        child: Image.asset(
+          'assets/logo.webp',
+          scale: 1.5,
         ),
       ),
     );

@@ -4,6 +4,8 @@ import 'package:rick_and_morty_app/screens/episodes_list/widgets/episode_tile.da
 import 'package:rick_and_morty_app/sqlite.dart';
 
 class FavoritesScreen extends StatefulWidget {
+  const FavoritesScreen({super.key});
+
   @override
   _FavoritesScreenState createState() => _FavoritesScreenState();
 }
@@ -16,7 +18,7 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
     SQLite database = SQLite();
     await database.connect();
     List<Episode> episodesList = await database.getEpisodes('liked');
-    if (this.mounted) {
+    if (mounted) {
       setState(() {
         _episodes = episodesList;
         _loading = false;
@@ -35,18 +37,18 @@ class _FavoritesScreenState extends State<FavoritesScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Favoritos'),
+        title: const Text('Favoritos'),
         backgroundColor: Colors.transparent,
         elevation: 0.0,
       ),
       body: _loading
-          ? Center(child: CircularProgressIndicator())
+          ? const Center(child: CircularProgressIndicator())
           : _episodes.isEmpty
               ? Center(
                   child: Column(
                     mainAxisSize: MainAxisSize.min,
                     mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
+                    children: const [
                       Icon(
                         Icons.star_border_rounded,
                         size: 60.0,

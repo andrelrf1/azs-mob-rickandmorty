@@ -6,7 +6,7 @@ class CharacterCardWidget extends StatelessWidget {
   final String? status;
   final String? imageURL;
 
-  CharacterCardWidget({
+  const CharacterCardWidget({
     Key? key,
     required this.characterName,
     required this.specie,

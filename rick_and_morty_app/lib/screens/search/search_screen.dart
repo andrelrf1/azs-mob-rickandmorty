@@ -4,7 +4,7 @@ import 'package:rick_and_morty_app/screens/episodes_list/widgets/episode_tile.da
 class SearchScreen extends StatefulWidget {
   final List<Map<String, dynamic>> episodes;
 
-  SearchScreen({Key? key, required this.episodes}) : super(key: key);
+  const SearchScreen({Key? key, required this.episodes}) : super(key: key);
 
   @override
   _SearchScreenState createState() => _SearchScreenState();
@@ -17,31 +17,31 @@ class _SearchScreenState extends State<SearchScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: PreferredSize(
-        preferredSize: Size.fromHeight(75.0),
+        preferredSize: const Size.fromHeight(75.0),
         child: Column(
           children: [
-            SizedBox(height: 50.0),
+            const SizedBox(height: 50.0),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 15.0),
               child: TextField(
                 onChanged: (value) {
                   List<Map<String, dynamic>> itens = [];
-                  widget.episodes.forEach((element) {
+                  for (var element in widget.episodes) {
                     if (element['name']
                         .toLowerCase()
                         .contains(value.toLowerCase())) {
                       itens.add(element);
                     }
-                    if (this.mounted) {
+                    if (mounted) {
                       setState(() {
                         _filteredEpisodes = itens;
                       });
                     }
-                  });
+                  }
                 },
                 decoration: InputDecoration(
                   isDense: true,
-                  suffixIcon: Icon(Icons.search_rounded),
+                  suffixIcon: const Icon(Icons.search_rounded),
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.circular(90.0),
                   ),

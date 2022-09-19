@@ -3,7 +3,10 @@ import 'package:flutter/material.dart';
 class BottomAppBarWidget extends StatefulWidget {
   final PageController pageCtrl;
 
-  BottomAppBarWidget({Key? key, required this.pageCtrl}) : super(key: key);
+  const BottomAppBarWidget({
+    Key? key,
+    required this.pageCtrl,
+  }) : super(key: key);
 
   @override
   _BottomAppBarWidgetState createState() => _BottomAppBarWidgetState();
@@ -17,7 +20,7 @@ class _BottomAppBarWidgetState extends State<BottomAppBarWidget> {
     return BottomAppBar(
       color: Colors.transparent,
       elevation: 0.0,
-      child: Container(
+      child: SizedBox(
         height: 75.0,
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,

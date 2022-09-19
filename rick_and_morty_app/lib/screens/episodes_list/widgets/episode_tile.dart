@@ -9,7 +9,7 @@ class EpisodeTileWidget extends StatelessWidget {
   final bool? watched;
   final bool? liked;
 
-  EpisodeTileWidget({
+  const EpisodeTileWidget({
     Key? key,
     required this.title,
     required this.details,
@@ -52,7 +52,7 @@ class EpisodeTileWidget extends StatelessWidget {
           padding: const EdgeInsets.all(10.0),
           child: Row(
             children: [
-              Container(
+              SizedBox(
                 width: 70,
                 height: 70,
                 child: ClipRRect(
@@ -63,14 +63,14 @@ class EpisodeTileWidget extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(width: 10.0),
+              const SizedBox(width: 10.0),
               Expanded(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     Text('$id - $title'),
-                    SizedBox(height: 15.0),
+                    const SizedBox(height: 15.0),
                     Text(
                       '$details - $releaseDate',
                       style: TextStyle(
@@ -81,7 +81,7 @@ class EpisodeTileWidget extends StatelessWidget {
                   ],
                 ),
               ),
-              Icon(Icons.arrow_forward_ios_rounded),
+              const Icon(Icons.arrow_forward_ios_rounded),
             ],
           ),
         ),
